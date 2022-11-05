@@ -30,16 +30,11 @@ import Layout from '@/layout'
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
+// 常量路由
 export const constantRoutes = [
   {
     path: '/login',
     component: () => import('@/views/login/index'),
-    hidden: true
-  },
-
-  {
-    path: '/404',
-    component: () => import('@/views/404'),
     hidden: true
   },
   {
@@ -53,7 +48,12 @@ export const constantRoutes = [
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
-  // 商品管理
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
+]
+// 异步路由
+export const asyncRoutes = [
+// 商品管理
   {
     path: '/product',
     component: Layout,
@@ -132,12 +132,14 @@ export const constantRoutes = [
         }
       }
     ]
-  },
-
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]
-
+// 任意路由 出现错误
+export const anyRoutes = {
+  path: '/404',
+  component: () => import('@/views/404'),
+  hidden: true
+}
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
