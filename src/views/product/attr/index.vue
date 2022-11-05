@@ -152,6 +152,7 @@ export default {
       }
       // 新增的属性值不能与已有的重复
       const isrepeat = this.attrinfo.attrValueList.some((item) => {
+        // 比较时去掉自己
         if (row !== item) {
           return row.valueName === item.valueName
         }
